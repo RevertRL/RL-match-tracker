@@ -8,6 +8,7 @@
 
 ### Resources 
   - JavaScript / EJS
+  - Express
   - MongoDB
   - Herouku 
 
