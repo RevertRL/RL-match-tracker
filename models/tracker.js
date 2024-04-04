@@ -14,9 +14,7 @@ const playerSchema = new Schema({
         enum: ['SSL', 'GC', 'C', 'D', 'P', 'G', 'S', 'B']
     },
     ranks: {
-        oneVsOne: String,
-        twoVsTwo: String,
-        threeVsThree: String
+        name: String
     },
     matches: [matchSchema]
 });

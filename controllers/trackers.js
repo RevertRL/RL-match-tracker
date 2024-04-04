@@ -7,7 +7,7 @@ const Player = require('../models/tracker');
 async function index(req, res) {
     try {
         const players = await Player.find();
-        res.render('trackers/player', { players });
+        res.render('trackers/index', { players, title: 'Players' }); // Pass the title variable
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
@@ -25,6 +25,7 @@ async function createPlayer(req, res){
         res.status(500).send('Server Error');
     }
 };
+
 
 async function deletePlayer(req, res){
     try {
