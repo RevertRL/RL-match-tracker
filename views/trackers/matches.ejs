@@ -1,9 +1,23 @@
-
-
+<%- include('../partials/header') %>
+<h1>Player List</h1>
 
 <h1>Match History</h1>
+<h1>Player List</h1>
 <ul>
-    <% matches.forEach(match => { %>
-        <li><%= match.result %></li>
+    <% players.forEach(function(player) { %>
+        <li>
+            <strong><%= player.name %></strong> - <%= player.skillGroup %>
+            <% include match-details.ejs { matches: player.matches } %>
+            <form action="/tracker/<%= player._id %>/matches" method="POST">
+                <label for="type">Match Type:</label>
+                <input type="text" id="type" name="type" required>
+                <label for="result">Match Result:</label>
+                <input type="text" id="result" name="result" required>
+                <label for="details">Match Details:</label>
+                <input type="text" id="details" name="details">
+                <button type="submit">Add Match</button>
+            </form>
+        </li>
     <% }); %>
 </ul>
+<%- include('../partials/footer') %>

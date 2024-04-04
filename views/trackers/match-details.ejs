@@ -1,5 +1,17 @@
+<%- include('../partials/header') %>
+<h1>Match Details</h1>
+
+<% matches.forEach(function(match) { %>
+    <div>
+        <strong>Match Type:</strong> <%= match.type %><br>
+        <strong>Match Result:</strong> <%= match.result %><br>
+        <% if (match.details) { %>
+            <strong>Match Details:</strong> <%= match.details %><br>
+        <% } %>
+    </div>
+<% }); %>
 
 
-    <h1>Match Details</h1>
-    <p>Result: <%= match.result %></p>
-    <p>Details: <%= match.details %></p>
+
+
+<%- include('../partials/footer') %>
