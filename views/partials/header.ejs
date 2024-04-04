@@ -9,14 +9,13 @@
 </head>
 <body>
     <nav>
-        <img src="/images/camera.svg">
-        <a href="/trackers" <%- title === 'Players' ? 'class="active"' : '' %>>PLAYERS</a>
         <% if (user) { %>
-          <a href="/trackers/player"	<%- title === 'Add Player' ? 'class="active"' : '' %>>
-          ADD PLAYERS</a>
-          <a href="/trackers/matches" <%- title === 'Add Match' ? 'class="active"' : '' %>>ADD MATCH</a>
+            <a href="/">Home</a>&nbsp;|&nbsp;<a href="/trackers/new">New Players</a>&nbsp;|
+            &nbsp;<a href="/trackers">All Players</a>
           <a href="/logout">LOG OUT</a>
         <% } else { %>
           <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
         <% } %>
-      </nav>
+    </nav>
+</body>
+</html>

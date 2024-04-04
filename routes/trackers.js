@@ -6,10 +6,12 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 
 router.get('/', playerController.index);
-router.post('/player', ensureLoggedIn, playerController.createPlayer);
-router.delete('/:id', playerController.deletePlayer);
-router.post('/:id/matches', ensureLoggedIn, playerController.createMatchForPlayer);
-router.delete('/:playerId/matches/:matchId', playerController.deleteMatchForPlayer);
+router.get('/new', playerController.new)
+router.get('/:id', playerController.show);
+router.post('/new', ensureLoggedIn, playerController.new);
+router.post('/:id', playerController.delete);
+router.post('player/:id/matches', ensureLoggedIn, playerController.matches);
+
 
 
 module.exports = router;

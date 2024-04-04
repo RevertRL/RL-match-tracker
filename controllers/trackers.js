@@ -1,82 +1,82 @@
 const Player = require('../models/tracker');
-
-
- 
-
+const Match = require('../models/tracker');
 
 async function index(req, res) {
     try {
         const players = await Player.find();
-        res.render('trackers/index', { players, title: 'Players' }); // Render the player.ejs file with the list of players
+        const matches = await Match.find();
+        res.render('trackers/index', { players: players, matches: matches });
     } catch (err) {
-        console.error(err);
+        console.error('Error fetching players:', err);
         res.status(500).send('Server Error');
     }
 }
 
-async function createPlayer(req, res) {
+  async function create(req, res) {
     try {
-        const { name, skillGroup, ranks } = req.body;
-        const newPlayer = new Player({ name, skillGroup, ranks });
-        await newPlayer.save();
-        res.redirect('trackers/player'); // Redirect to the player list page after creating the player
+      await Player.create(req.body);
+      res.redirect('/trackers');
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
+      console.log(err);
+      res.render('trackers/new', { errorMsg: err.message });
     }
-}
+  }
+  function newPlayer(req, res) {
+    const player = {
+        matches : []
+    };
+    res.render('trackers/new', { player });
+  }
 
-async function deletePlayer(req, res) {
-    try {
-        const playerId = req.params.id;
-        const deletedPlayer = await Player.findByIdAndDelete(playerId);
-        res.redirect('trackers/player'); // Redirect to the player list page after deleting the player
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-    }
-}
-
-async function createMatchForPlayer(req, res) {
+  async function show(req, res) {
     try {
         const playerId = req.params.id;
-        const player = await Player.findById(playerId);
+        const player = await Player.findById(playerId); // Correct reference to Player model
         if (!player) {
             return res.status(404).json({ message: 'Player not found' });
         }
-        const { type, result, details } = req.body;
-        const newMatch = { type, result, details };
-        player.matches.push(newMatch);
-        await player.save();
-        res.redirect('trackers/matches'); // Redirect to the player list page after creating the match
+        res.render('trackers/show', { player }); // Render the show.ejs file with the player details
     } catch (err) {
-        console.error(err);
+        console.error('Error finding player:', err);
         res.status(500).send('Server Error');
     }
 }
 
-async function deleteMatchForPlayer(req, res) {
+  async function matches(req, res) {
     try {
-        const playerId = req.params.playerId;
-        const matchId = req.params.matchId;
-        const player = await Player.findById(playerId);
-        if (!player) {
-            return res.status(404).json({ message: 'Player not found' });
-        }
-        player.matches.id(matchId).remove();
-        await player.save();
-        res.redirect('trackers/matches'); // Redirect to the player list page after deleting the match
+      const match = await Match.findById(req.params.id);
+      if (!match) {
+        return res.status(404).send('Match not found');
+      }
+  
+      player.match.push(req.body);
+      await match.save();
+  
+      res.redirect(`/trackers/${match._id}`);
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
+      console.error('Error finding or saving match:', err);
+      res.status(500).send('Internal Server Error');
     }
-}
+  };
 
-module.exports = {
+  const deletePlayer = async (req, res) => {
+    const playerId = req.params.id;
+  
+    try {
+      await Player.findByIdAndDelete(playerId);
+      res.status(204).redirect('/')
+    } catch (error) {
+      console.error('Error deleting player:', error);
+      res.status(500).json({ error: 'Unable to delete player' });
+    }
+  };
+
+  module.exports = {
     index,
-    createPlayer,
-    deletePlayer,
-    createMatchForPlayer,
-    deleteMatchForPlayer
+    new: newPlayer,
+    create,
+    show,
+    matches,
+    delete: deletePlayer
+  };
 
-}

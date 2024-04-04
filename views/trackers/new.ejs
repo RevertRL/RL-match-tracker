@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+<div class="playerAdd">   
+    <h1>Player List</h1>
+    <form action="/players" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="skillGroup">Skill Group:</label>
+        <select  name="skillGroup" id="skillGroup">
+            <option value="SSL">Supersonic Legend</option>
+            <option value="GC">Grand Champion</option>
+            <option value="C">Champion</option>
+            <option value="D">Diamond</option>
+            <option value="P">Platinum</option>
+            <option value="G">Gold</option>
+            <option value="S">Silver</option>
+            <option value="B">Bronze</option>
+        </select>
+        <label for="matchType">Match Type:</label>
+        <select id="matchType" name="type" required>
+            <option value="1v1">1v1</option>
+            <option value="2v2">2v2</option>
+            <option value="3v3">3v3</option>
+        </select>   
+        <button type="submit" class="addButton">Add Player</button>
+    </form>
+    </div>    
+
+
+<%- include('../partials/footer') %>

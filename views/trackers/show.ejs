@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-<h1>Player List</h1>
 
 <h1>Match History</h1>
 <h1>Player List</h1>
@@ -17,7 +16,16 @@
                 <input type="text" id="details" name="details">
                 <button type="submit">Add Match</button>
             </form>
+
+            <ul>
+                <% player.matches.forEach(function(match) { %>
+                  <li>
+                    <%= match.type %> - <%= match.result %> - <%= match.details %>
+                  </li>
+                <% }); %>
+            </ul>
         </li>
     <% }); %>
 </ul>
+
 <%- include('../partials/footer') %>
