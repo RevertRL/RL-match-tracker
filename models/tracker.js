@@ -9,7 +9,10 @@ const matchSchema = new Schema({
 
 const playerSchema = new Schema({
     name: String,
-    skillGroup: String,
+    skillGroup: {
+        String,
+        enum: ['SSL', 'GC', 'C', 'D', 'P', 'G', 'S', 'B']
+    },
     ranks: {
         oneVsOne: String,
         twoVsTwo: String,

@@ -6,3 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+
+.playerAdd {
+  display: flex;
+  flex-direction: column;
+  color: red;
+}
+
+.addButton {
+  background-color: black;
+  color: silver;
+}
+
+
+

@@ -1,10 +1,26 @@
-
-
-
-
+<%- include('../partials/header') %>
+<ul>
+<div class="playerAdd">   
 <h1>Player List</h1>
-    <ul>
-        <% players.forEach(player => { %>
-            <li><%= player.name %></li>
-        <% }); %>
-    </ul>
+<form action="/players" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="skillGroup">Skill Group:</label>
+    <select  name="skillGroup" id="skillGroup">
+        <option value="SSL">Supersonic Legend</option>
+        <option value="GC">Grand Champion</option>
+        <option value="C">Champion</option>
+        <option value="D">Diamond</option>
+        <option value="P">Platinum</option>
+        <option value="G">Gold</option>
+        <option value="S">Silver</option>
+        <option value="B">Bronze</option>
+        <label for="rank">Rank:</label>
+        <input type="text" id="rank" name="rank" required>
+        
+    <!-- Add additional fields as needed -->
+    <button type="submit" class="addButton">Add Player</button>
+</form>
+</div>    
+</ul>
+<%- include('../partials/footer') %>
