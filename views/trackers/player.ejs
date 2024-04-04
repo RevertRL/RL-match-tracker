@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-<ul>
+
 <div class="playerAdd">   
 <h1>Player List</h1>
 <form action="/players" method="POST">
@@ -15,12 +15,13 @@
         <option value="G">Gold</option>
         <option value="S">Silver</option>
         <option value="B">Bronze</option>
+    </select>
         <label for="rank">Rank:</label>
-        <input type="text" id="rank" name="rank" required>
+        <input type="text" id="rank" name="ranks" required>
         
     <!-- Add additional fields as needed -->
     <button type="submit" class="addButton">Add Player</button>
 </form>
 </div>    
-</ul>
+
 <%- include('../partials/footer') %>

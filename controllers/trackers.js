@@ -7,38 +7,37 @@ const Player = require('../models/tracker');
 async function index(req, res) {
     try {
         const players = await Player.find();
-        res.render('trackers/index', { players, title: 'Players' }); // Pass the title variable
+        res.render('trackers/index', { players, title: 'Players' }); // Render the player.ejs file with the list of players
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
     }
-};
+}
 
-async function createPlayer(req, res){
+async function createPlayer(req, res) {
     try {
         const { name, skillGroup, ranks } = req.body;
         const newPlayer = new Player({ name, skillGroup, ranks });
         await newPlayer.save();
-        res.json(newPlayer);
+        res.redirect('trackers/player'); // Redirect to the player list page after creating the player
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
     }
-};
+}
 
-
-async function deletePlayer(req, res){
+async function deletePlayer(req, res) {
     try {
         const playerId = req.params.id;
         const deletedPlayer = await Player.findByIdAndDelete(playerId);
-        res.json(deletedPlayer);
+        res.redirect('trackers/player'); // Redirect to the player list page after deleting the player
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
     }
-};
+}
 
-async function createMatchForPlayer(req, res){
+async function createMatchForPlayer(req, res) {
     try {
         const playerId = req.params.id;
         const player = await Player.findById(playerId);
@@ -49,14 +48,14 @@ async function createMatchForPlayer(req, res){
         const newMatch = { type, result, details };
         player.matches.push(newMatch);
         await player.save();
-        res.json(player);
+        res.redirect('trackers/matches'); // Redirect to the player list page after creating the match
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
     }
-};
+}
 
-async function deleteMatchForPlayer(req, res){
+async function deleteMatchForPlayer(req, res) {
     try {
         const playerId = req.params.playerId;
         const matchId = req.params.matchId;
@@ -66,12 +65,12 @@ async function deleteMatchForPlayer(req, res){
         }
         player.matches.id(matchId).remove();
         await player.save();
-        res.json(player);
+        res.redirect('trackers/matches'); // Redirect to the player list page after deleting the match
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
     }
-};
+}
 
 module.exports = {
     index,
