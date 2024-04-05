@@ -6,7 +6,7 @@
         <li>
             <strong><%= player.name %></strong> - <%= player.skillGroup %>
             <% include match-details.ejs { matches: player.matches } %>
-            <form action="/players/<%= player._id %>/matches" method="POST">
+            <form action="/players/<%= player._id %>/match-details" method="POST">
                 <label for="type">Match Type:</label>
                 <input type="text" id="type" name="type" required>
                 <label for="result">Match Result:</label>
@@ -24,6 +24,8 @@
                 <input type="number" id="playerGoals" name="playerGoals" min="0" max="25" required>
                 <button type="submit">Add Match</button>
             </form>
+            
+
 
             <ul>
                 <% player.matches.forEach(function(match) { %>

@@ -1,28 +1,47 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const matchSchema = new Schema({
-    type: String,
-    result: String,
-    score1: String,
-    score2: String,
-    playerScore: String,
-    playerGoals: String
+const matchSchema = new mongoose.Schema({
+    result: {
+        type: String,
+        enum: ['Win', 'Loss'],
+        default: 'Win'
+    },
+    score1: { 
+        type: Number,
+        min: 0,
+        max: 25,
+    },
+    score2: { 
+        type: Number,
+        min: 0,
+        max: 25,
+    },
+    playerScore: {
+        type: Number,
+        min: 0,
+        max: 2500,
+    },
+    playerGoals: {
+        type: Number,
+        min: 0,
+        max: 25,
+    }
 });
 
-const playerSchema = new Schema({
+const playerSchema = new mongoose.Schema({
     name: String,
     skillGroup: {
-        String,
-        enum: ['SSL', 'GC', 'C', 'D', 'P', 'G', 'S', 'B']
+        type: String,
+        enum: ['SSL', 'GC', 'C', 'D', 'P', 'G', 'S', 'B'],
     },
     matchType: {
-        String,
-        enum: ['1v1', '2v2', '3v3']
+        type: String,
+        enum: ['1v1', '2v2', '3v3'],   
     },
     matches: [matchSchema]
 });
 
-const Player = mongoose.model('Player', playerSchema);
 
-module.exports = Player;
+
+module.exports = mongoose.model('Player', playerSchema);

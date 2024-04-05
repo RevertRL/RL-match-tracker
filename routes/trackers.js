@@ -7,10 +7,10 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 router.get('/', playerCtrl.index);
 router.get('/new', playerCtrl.new)
-router.get('/:id', playerCtrl.show);
 router.post('/', ensureLoggedIn, playerCtrl.create);
+router.get('/:id', playerCtrl.show);
+router.post('/:id/matches', ensureLoggedIn, playerCtrl.matches);
 router.post('/:id', playerCtrl.delete);
-router.post('/players/:id/matches', ensureLoggedIn, playerCtrl.matches);
 
 
 

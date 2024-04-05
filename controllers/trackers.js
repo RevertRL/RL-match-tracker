@@ -5,7 +5,7 @@ async function index(req, res) {
     try {
         const players = await Player.find();
         const matches = await Match.find();
-        res.render('trackers/index', { players: players, matches: matches });
+        res.render('trackers/index', { players, matches });
     } catch (err) {
         console.error('Error fetching players:', err);
         res.status(500).send('Server Error');
@@ -21,21 +21,23 @@ async function index(req, res) {
       res.render('trackers/new', { errorMsg: err.message });
     }
   }
+
   function newPlayer(req, res) {
     const player = {
-        matches : []
+        matches: []
     };
     res.render('trackers/new', { player });
   }
 
   async function show(req, res) {
     try {
-        const playerId = req.params.id;
-        const player = await Player.findById(playerId); // Correct reference to Player model
+        const player = await Player.findById(req.params.id)
+
+        .exec(); 
         if (!player) {
             return res.status(404).json({ message: 'Player not found' });
         }
-        res.render('trackers/show', { player }); // Render the show.ejs file with the player details
+        res.render('trackers/show', { player }); 
     } catch (err) {
         console.error('Error finding player:', err);
         res.status(500).send('Server Error');
@@ -44,15 +46,14 @@ async function index(req, res) {
 
 async function matches(req, res) {
     try {
-      const playerId = req.params.id;
-      const match = await Match.findById(playerId); // Assuming the match ID is the same as player ID
+      const match = await Match.findById(matchId); 
       if (!match) {
         return res.status(404).send('Match not found');
       }
   
-      // Assuming player is already defined somewhere in your code
+      
       player.matches.push(req.body);
-      await player.save(); // Assuming player.save() is used to save the changes
+      await player.save(); 
   
       res.redirect(`/trackers/${match._id}`);
     } catch (err) {
@@ -66,7 +67,7 @@ async function matches(req, res) {
   
     try {
       await Player.findByIdAndDelete(playerId);
-      res.status(204).redirect('/')
+      res.redirect('/')
     } catch (error) {
       console.error('Error deleting player:', error);
       res.status(500).json({ error: 'Unable to delete player' });
