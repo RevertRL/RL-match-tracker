@@ -13,7 +13,7 @@ const playerSchema = new Schema({
         String,
         enum: ['SSL', 'GC', 'C', 'D', 'P', 'G', 'S', 'B']
     },
-    ranks: {
+    matchTypes: {
         String,
         enum: ['1v1', '2v2', '3v3']
     },

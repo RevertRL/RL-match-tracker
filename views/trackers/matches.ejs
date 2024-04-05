@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+<h1>Match Details</h1>
+
+<ul>
+    <% players.forEach(player => { %>
+      <li class="player">
+        <strong>Name:</strong> <%= player.name %><br>
+        <strong>Skill Group:</strong> <%= player.skillGroup %><br>
+        <form action="/players/<%= player._id %>?_method=DELETE" method="POST">
+          <button type="submit">Remove Player</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+  <ul>
+    <% matches.forEach(function(match) { %>
+      <li class="match">
+        <strong>Type:</strong> <%= match.type %><br>
+        <strong>Result:</strong> <%= match.result %><br>
+        <strong>Details:</strong> <%= match.details %><br>
+      </li>
+    <% }); %>
+ </ul>
+
+
+
+<%- include('../partials/footer') %>
