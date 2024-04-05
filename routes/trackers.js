@@ -1,16 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-const playerController = require('../controllers/trackers');
+const playerCtrl = require('../controllers/trackers');
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 
-router.get('/', playerController.index);
-router.get('/new', playerController.new)
-router.get('/:id', playerController.show);
-router.post('/', ensureLoggedIn, playerController.create);
-router.post('/:id', playerController.delete);
-router.post('player/:id/matches', ensureLoggedIn, playerController.matches);
+router.get('/', playerCtrl.index);
+router.get('/new', playerCtrl.new)
+router.get('/:id', playerCtrl.show);
+router.post('/', ensureLoggedIn, playerCtrl.create);
+router.post('/:id', playerCtrl.delete);
+router.post('/players/:id/matches', ensureLoggedIn, playerCtrl.matches);
 
 
 

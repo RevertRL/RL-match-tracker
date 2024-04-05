@@ -42,22 +42,24 @@ async function index(req, res) {
     }
 }
 
-  async function matches(req, res) {
+async function matches(req, res) {
     try {
-      const match = await Match.findById(req.params.id);
+      const playerId = req.params.id;
+      const match = await Match.findById(playerId); // Assuming the match ID is the same as player ID
       if (!match) {
         return res.status(404).send('Match not found');
       }
   
-      player.match.push(req.body);
-      await match.save();
+      // Assuming player is already defined somewhere in your code
+      player.matches.push(req.body);
+      await player.save(); // Assuming player.save() is used to save the changes
   
       res.redirect(`/trackers/${match._id}`);
     } catch (err) {
       console.error('Error finding or saving match:', err);
       res.status(500).send('Internal Server Error');
     }
-  };
+};
 
   const deletePlayer = async (req, res) => {
     const playerId = req.params.id;

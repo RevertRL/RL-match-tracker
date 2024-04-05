@@ -23,7 +23,18 @@
         </select>   
         <button type="submit" class="addButton">Add Player</button>
     </form>
-    </div>    
-
+    </div>
+    <h1>Players</h1>   
+    <ul>
+        <% players.forEach(function(player) { %>
+          <li class="player-details">
+            <strong>Name:</strong> <%= player.name %><br>
+            <strong>Skill Group:</strong> <%= player.skillGroup %><br>
+            <strong>Match Type:</strong> <%= player.matchType %><br>
+            <strong>Details:</strong> <%= player.details %><br>
+            <a href="/players/<%= player._id %>">View Details</a>
+          </li>
+        <% }); %>
+    </ul>
 
 <%- include('../partials/footer') %>

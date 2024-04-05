@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
   <title>RL Tracking</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
@@ -11,7 +14,7 @@
     <nav>
         <% if (user) { %>
             <a href="/">Home</a>&nbsp;|&nbsp;<a href="/trackers/new">New Players</a>&nbsp;|
-            &nbsp;<a href="/trackers">All Players</a>
+            &nbsp;<a href="/trackers/show">All Players</a>
           <a href="/logout">LOG OUT</a>
         <% } else { %>
           <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>

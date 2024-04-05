@@ -1,4 +1,8 @@
 body {
+  background: linear-gradient(to right, #1202c0, #f17901);
+  font-family: "Bungee Spice", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   margin: 0;
   height: 100vh;
   display: grid;
@@ -25,7 +29,7 @@ a {
 
 body > nav {
   grid-area: nav;
-  background-color: #B8C0C2;
+  background-color: rgb(0, 0, 0);
   display: flex;
   justify-content: flex-end;
   align-items: center;
