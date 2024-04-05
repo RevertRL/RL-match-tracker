@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const matchSchema = new Schema({
-    type: String, // 1v1, 2v2, 3v3
+    type: String,
     result: String,
-    details: String // You can add more details here
+    score1: String,
+    score2: String,
+    playerScore: String,
+    playerGoals: String
 });
 
 const playerSchema = new Schema({
