@@ -26,7 +26,8 @@ const matchSchema = new mongoose.Schema({
         type: Number,
         min: 0,
         max: 25,
-    }
+    },
+    
 });
 
 const playerSchema = new mongoose.Schema({
@@ -39,7 +40,11 @@ const playerSchema = new mongoose.Schema({
         type: String,
         enum: ['1v1', '2v2', '3v3'],   
     },
-    matches: [matchSchema]
+    matches: [matchSchema],
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
 });
 
 

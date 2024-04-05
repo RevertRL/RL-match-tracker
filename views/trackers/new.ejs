@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-<div class="playerAdd">   
+<div class="text-4xl">   
     <h1>Player List</h1>
     <form action="/trackers" method="POST">
         <label for="name">Name:</label>
@@ -14,13 +14,7 @@
             <option value="G">Gold</option>
             <option value="S">Silver</option>
             <option value="B">Bronze</option>
-        </select>
-        <label for="matchType">Match Type:</label>
-        <select id="matchType" name="type" required>
-            <option value="1v1">1v1</option>
-            <option value="2v2">2v2</option>
-            <option value="3v3">3v3</option>
-        </select>   
+        </select> 
         <button type="submit" class="addButton">Add Player</button>
     </form>
     </div>

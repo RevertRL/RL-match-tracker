@@ -1,14 +1,11 @@
 <%- include('../partials/header') %>
 
-<h1>Match History</h1>
+<h1 class="text-6xl">Match History</h1>
 <ul>
     <% players.forEach(function(player) { %>
         <li>
-            <strong><%= player.name %></strong> - <%= player.skillGroup %>
-            <% include match-details.ejs { matches: player.matches } %>
+            <h2 class="text-4xl"><%= player.name %></h2>
             <form action="/players/<%= player._id %>/match-details" method="POST">
-                <label for="type">Match Type:</label>
-                <input type="text" id="type" name="type" required>
                 <label for="result">Match Result:</label>
                 <select id="result" name="result" required>
                     <option value="Win">Win</option>
