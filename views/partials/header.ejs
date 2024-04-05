@@ -8,13 +8,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
   <title>RL Tracking</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/output.css' />
 </head>
 <body>
     <nav>
         <% if (user) { %>
             <a href="/">Home</a>&nbsp;|&nbsp;<a href="/trackers/new">New Players</a>&nbsp;|
-            &nbsp;<a href="/trackers/show">All Players</a>&nbsp; | &nbsp;<a href="/trackers/match-details">Match Details</a>
+            &nbsp;<a href="/trackers/match-details">All Players</a>
           <a href="/logout">LOG OUT</a>
         <% } else { %>
           <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>

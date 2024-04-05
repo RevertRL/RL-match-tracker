@@ -29,3 +29,4 @@
 ## credits
   - add as i get them
   - google fonts for the font https://fonts.google.com/selection/embed
+  - Tom and Zombie for helping me when I needed it.

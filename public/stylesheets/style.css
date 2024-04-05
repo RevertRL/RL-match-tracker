@@ -1,3 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+
+
 body {
   background: linear-gradient(to right, #1202c0, #f17901);
   font-family: "Bungee Spice", sans-serif;

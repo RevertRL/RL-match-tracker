@@ -1,21 +1,23 @@
 <%- include('../partials/header') %>
 
-<h1>Welcome To RL-Match-Tracker</h1>
-<h1>Players</h1> 
-    
-    <ul>
+<h1 class="text-6xl text-center ">Welcome To RL-Match-Tracker</h1>
+<div class="md:container md:mx-auto">
+<h1 class="text-4xl">Players</h1>
+    <ul class="grid grid-cols-4 ">
         <% players.forEach(function(player) { %>
           <li class="player-details">
+            <div class="text-2xl">
             <strong>Name:</strong> <%= player.name %><br>
             <strong>Skill Group:</strong> <%= player.skillGroup %><br>
             <strong>Match Type:</strong> <%= player.matchType %><br>
             <strong>Details:</strong> <%= player.details %><br>
+            </div>
+            <a href="/trackers/<%= player._id %>/show" >View Details</a>
             <form action="/trackers/<%= player._id %>?_method=DELETE" method="POST">
-                <button type="submit">Remove Player</button>
+                <button type="submit" class="bg-slate-800 text-white hover:bg-slate-900 px-5 py-2 rounded-full" >Remove Player</button>
               </form>
-            <a href="/players/<%= player._id %>">View Details</a>
           </li>
         <% }); %>
     </ul>
-
+</div>
 <%- include('../partials/footer') %>
