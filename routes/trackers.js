@@ -9,7 +9,7 @@ router.get('/', playerCtrl.index);
 router.get('/new', playerCtrl.new)
 router.post('/', ensureLoggedIn, playerCtrl.create);
 router.get('/show', playerCtrl.show);
-router.post('/matches', ensureLoggedIn, playerCtrl.matches);
+router.post(':id/matches', ensureLoggedIn, playerCtrl.matches);
 router.post('/:id', playerCtrl.delete);
 
 

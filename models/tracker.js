@@ -36,10 +36,6 @@ const playerSchema = new mongoose.Schema({
         type: String,
         enum: ['SSL', 'GC', 'C', 'D', 'P', 'G', 'S', 'B'],
     },
-    matchType: {
-        type: String,
-        enum: ['1v1', '2v2', '3v3'],   
-    },
     matches: [matchSchema],
     user:{
         type: Schema.Types.ObjectId,

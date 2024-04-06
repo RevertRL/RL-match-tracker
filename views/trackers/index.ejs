@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-<h1 class="text-6xl text-center ">Welcome To RL-Match-Tracker</h1>
+
 <div class="md:container md:mx-auto">
 <h1 class="text-4xl">Players</h1>
     <ul class="grid grid-cols-4 ">
@@ -9,7 +9,7 @@
             <div class="text-2xl">
             <strong>Name:</strong> <%= player.name %><br>
             <strong>Skill Group:</strong> <%= player.skillGroup %><br>
-            <a href="/trackers/<%= player._id %>/show" >View Details</a>
+            <a href="/trackers/<%= player._id %>/show" class="font-weight 400">View Details</a>
             </div>
             <form action="/trackers/<%= player._id %>?_method=DELETE" method="POST">
                 <button type="submit" class="bg-slate-800 text-white hover:bg-slate-900 px-5 py-2 rounded-full" >Remove Player</button>

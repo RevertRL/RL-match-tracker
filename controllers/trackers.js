@@ -4,7 +4,7 @@ const Match = require('../models/tracker');
 async function index(req, res) {
     try {
         const players = await Player.find();
-        res.render('trackers/index', { players });
+        res.render('trackers/', { players });
     } catch (err) {
         console.error('Error fetching players:', err);
         res.status(500).send('Server Error');
@@ -35,7 +35,7 @@ async function index(req, res) {
         if (!player) {
             return res.status(404).json({ message: 'Player not found' });
         }
-        res.render('trackers/show', { players: player }); 
+        res.redirect('trackers/show', { players: player }); 
     } catch (err) {
         console.error('Error finding player:', err);
         res.status(500).send('Server Error');
@@ -45,22 +45,13 @@ async function index(req, res) {
 async function matches(req, res) {
     try {
         const playerId = req.params.id;
-        console.log('Player ID:', playerId);
-        const player = await Player.findById(playerId);
+        
+        const player = await Player.find(playerId);
         if (!player) {
             return res.status(404).send('Player not found');
         }
-
-        const newMatch = { 
-            type: req.body.type, 
-            result: req.body.result, 
-            score1: req.body.score1, 
-            score2: req.body.score2, 
-            playerScore: req.body.playerScore, 
-            playerGoals: req.body.playerGoals 
-        };
         
-        player.matches.push(newMatch);
+        player.matches.push(req.body);
         await player.save();
         
         res.redirect(`/trackers/${player._id}`);
