@@ -6,7 +6,7 @@
     <% players.forEach(function(player) { %>
         <li>
             <h2 class="text-4xl"><%= player.name %></h2>
-            <form action="/<%= player._id %>/matches" method="POST">
+            <form action="/trackers/<%= player._id %>/matches" method="POST">
                 <label for="result">Match Result:</label>
                 <select id="result" name="result" required>
                     <option value="Win">Win</option>

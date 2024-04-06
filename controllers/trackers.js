@@ -41,9 +41,9 @@ async function showAll(req, res) {
 }
 async function matches(req, res) {
     try {
-        const playerId = req.params.id;
         
-        const player = await Player.find(playerId);
+        const playerId = req.params.id;
+        const player = await Player.findById(playerId);
         if (!player) {
             return res.status(404).send('Player not found');
         }
