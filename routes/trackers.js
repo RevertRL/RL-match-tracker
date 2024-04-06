@@ -8,8 +8,8 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 router.get('/', playerCtrl.index);
 router.get('/new', playerCtrl.new)
 router.post('/', ensureLoggedIn, playerCtrl.create);
-router.get('/show', playerCtrl.show);
-router.post(':id/matches', ensureLoggedIn, playerCtrl.matches);
+router.post('/:id/matches', ensureLoggedIn, playerCtrl.matches);
+router.get('/:id', playerCtrl.showAll);
 router.post('/:id', playerCtrl.delete);
 
 

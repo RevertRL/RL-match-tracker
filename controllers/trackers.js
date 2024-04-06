@@ -3,45 +3,42 @@ const Match = require('../models/tracker');
 
 async function index(req, res) {
     try {
+        req.body.user = req.user._id
         const players = await Player.find();
-        res.render('trackers/', { players });
+        res.render('trackers/index', { players });
     } catch (err) {
         console.error('Error fetching players:', err);
         res.status(500).send('Server Error');
     }
 }
 
-  async function create(req, res) {
+async function create(req, res) {
     try {
-      req.body.user = req.user._id  
-      await Player.create(req.body);
-      res.redirect('/trackers');
+        
+        await Player.create(req.body);
+        res.redirect('trackers');
     } catch (err) {
-      console.log(err);
-      res.render('trackers/new', { errorMsg: err.message });
+        console.log(err);
+        res.render('trackers/new', { errorMsg: err.message });
     }
-  }
+}
 
-  function newPlayer(req, res) {
+function newPlayer(req, res) {
     const player = {
         matches: []
     };
     res.render('trackers/new', { player });
-  }
-
-  async function show(req, res) {
-    try {
-        const player = await Player.find({user: req.user._id}) 
-        if (!player) {
-            return res.status(404).json({ message: 'Player not found' });
-        }
-        res.redirect('trackers/show', { players: player }); 
-    } catch (err) {
-        console.error('Error finding player:', err);
-        res.status(500).send('Server Error');
-    }
 }
 
+async function showAll(req, res) {
+    try {
+        const players = await Player.find();
+        res.render('trackers/show', { players });
+    } catch (err) {
+        console.error('Error fetching players:', err);
+        res.status(500).send('Internal Server Error');
+    }
+}
 async function matches(req, res) {
     try {
         const playerId = req.params.id;
@@ -61,24 +58,24 @@ async function matches(req, res) {
     }
 }
 
-  const deletePlayer = async (req, res) => {
+const deletePlayer = async (req, res) => {
     const playerId = req.params.id;
-  
+    
     try {
-      await Player.findByIdAndDelete(playerId);
-      res.redirect('/')
+        await Player.findByIdAndDelete(playerId);
+        res.redirect('/')
     } catch (error) {
-      console.error('Error deleting player:', error);
-      res.status(500).json({ error: 'Unable to delete player' });
+        console.error('Error deleting player:', error);
+        res.status(500).json({ error: 'Unable to delete player' });
     }
-  };
+};
 
-  module.exports = {
+module.exports = {
     index,
     new: newPlayer,
     create,
-    show,
+    showAll,
     matches,
     delete: deletePlayer
-  };
+};
 
