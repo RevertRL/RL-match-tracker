@@ -9,7 +9,7 @@
             <div class="text-2xl">
             <strong>Name:</strong> <%= player.name %><br>
             <strong>Skill Group:</strong> <%= player.skillGroup %><br>
-            <a href="/trackers/<%= player._id %>/matches" class="font-weight 400">View Details</a>
+            <a href="/trackers/<%= player._id %>/showMatches" class="font-weight 400">View Details</a>
             </div>
             <form action="/trackers/<%= player._id %>?_method=DELETE" method="POST">
                 <button type="submit" class="bg-slate-800 text-white hover:bg-slate-900 px-5 py-2 rounded-full" >Remove Player</button>

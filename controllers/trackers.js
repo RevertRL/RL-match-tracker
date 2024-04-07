@@ -1,5 +1,5 @@
 const Player = require('../models/tracker');
-const Match = require('../models/tracker');
+
 
 async function index(req, res) {
     try {
@@ -23,6 +23,27 @@ async function create(req, res) {
     }
 }
 
+async function createMatch(req, res) {
+    try {
+        const playerId = req.params.id;
+        const player = await Player.findById(playerId);
+        if (!player) {
+            return res.status(404).send('Player not found');
+        }
+        
+        // Assuming a player can have multiple matches, pushing the new match to the player's matches array
+        player.matches.push(req.body);
+        
+        // Saving both the player and the match
+        await player.save();
+        
+        res.redirect(`/trackers/${player._id}`);
+    } catch (err) {
+        console.error('Error creating match:', err);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 function newPlayer(req, res) {
     const player = {
         matches: []
@@ -39,27 +60,43 @@ async function showAll(req, res) {
         res.status(500).send('Internal Server Error');
     }
 }
-async function matches(req, res) {
+
+
+async function showMatches(req, res) {
     try {
-        console.log('request reached')
         const playerId = req.params.id;
-        const player = await Player.findById(playerId);
-        console.log('Player ID:', playerId);
+        const player = await Player.findById(playerId).populate('matches');
+        console.log(player);
         if (!player) {
             return res.status(404).send('Player not found');
         }
+        res.render('trackers/showMatches', { player });
+    } catch (err) {
+        console.error('Error fetching player and matches:', err);
+        res.status(500).send('Internal Server Error');
+    }}
+
+// async function matches(req, res) {
+//     try {
+//         console.log('request reached')
+//         const playerId = req.params.id;
+//         const player = await Player.findById(playerId);
+//         console.log('Player ID:', playerId);
+//         if (!player) {
+//             return res.status(404).send('Player not found');
+//         }
 
         
         
-        player.matches.push(req.body);
-        await player.save();
+//         player.matches.push(req.body);
+//         await player.save();
         
-        res.redirect(`/trackers/${player._id}`);
-    } catch (err) {
-        console.error('Error finding or saving match:', err);
-        res.status(500).send('Internal Server Error');
-    }
-}
+//         res.redirect(`/trackers/${player._id}`);
+//     } catch (err) {
+//         console.error('Error finding or saving match:', err);
+//         res.status(500).send('Internal Server Error');
+//     }
+// }
 
 const deletePlayer = async (req, res) => {
     const playerId = req.params.id;
@@ -77,8 +114,8 @@ module.exports = {
     index,
     new: newPlayer,
     create,
+    createMatch,
     showAll,
-    matches,
+    showMatches,
     delete: deletePlayer
 };
-
