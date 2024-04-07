@@ -41,12 +41,15 @@ async function showAll(req, res) {
 }
 async function matches(req, res) {
     try {
-        
+        console.log('request reached')
         const playerId = req.params.id;
         const player = await Player.findById(playerId);
+        console.log('Player ID:', playerId);
         if (!player) {
             return res.status(404).send('Player not found');
         }
+
+        
         
         player.matches.push(req.body);
         await player.save();

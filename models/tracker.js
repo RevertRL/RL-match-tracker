@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const matchSchema = new mongoose.Schema({
+const matchesSchema = new mongoose.Schema({
     result: {
         type: String,
         enum: ['Win', 'Loss'],
@@ -36,7 +36,7 @@ const playerSchema = new mongoose.Schema({
         type: String,
         enum: ['SSL', 'GC', 'C', 'D', 'P', 'G', 'S', 'B'],
     },
-    matches: [matchSchema],
+    matches: [matchesSchema],
     user:{
         type: Schema.Types.ObjectId,
         ref: 'User'
