@@ -31,10 +31,7 @@ async function createMatch(req, res) {
             return res.status(404).send('Player not found');
         }
         
-        // Assuming a player can have multiple matches, pushing the new match to the player's matches array
         player.matches.push(req.body);
-        
-        // Saving both the player and the match
         await player.save();
         
         res.redirect(`/trackers/${player._id}`);
@@ -75,28 +72,6 @@ async function showMatches(req, res) {
         console.error('Error fetching player and matches:', err);
         res.status(500).send('Internal Server Error');
     }}
-
-// async function matches(req, res) {
-//     try {
-//         console.log('request reached')
-//         const playerId = req.params.id;
-//         const player = await Player.findById(playerId);
-//         console.log('Player ID:', playerId);
-//         if (!player) {
-//             return res.status(404).send('Player not found');
-//         }
-
-        
-        
-//         player.matches.push(req.body);
-//         await player.save();
-        
-//         res.redirect(`/trackers/${player._id}`);
-//     } catch (err) {
-//         console.error('Error finding or saving match:', err);
-//         res.status(500).send('Internal Server Error');
-//     }
-// }
 
 const deletePlayer = async (req, res) => {
     const playerId = req.params.id;
